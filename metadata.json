@@ -1,0 +1,6 @@
+{
+  "name": "Support Reporting System",
+  "description": "A clean, modern, Excel-inspired workspace for tracking, managing, and reporting support operations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

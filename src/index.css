@@ -1,0 +1,235 @@
+@import "tailwindcss";
+<<<<<<< HEAD
+
+@variant dark (&:where(.dark, .dark *));
+
+/* Global dark mode overrides for local memory and custom tables */
+.dark {
+  color-scheme: dark;
+
+  /* Overrides for background colors */
+  .bg-white {
+    background-color: var(--color-slate-900) !important;
+  }
+
+  .bg-slate-50 {
+    background-color: var(--color-slate-950) !important;
+  }
+
+  .bg-slate-100 {
+    background-color: var(--color-slate-950) !important;
+  }
+
+  /* Overrides for borders */
+  .border-gray-200,
+  .border-gray-100,
+  .border-slate-200,
+  .border-gray-300,
+  .border-slate-100 {
+    border-color: var(--color-slate-800) !important;
+  }
+
+  /* Overrides for text colors */
+  .text-gray-800,
+  .text-gray-700,
+  .text-slate-700 {
+    color: var(--color-slate-200) !important;
+  }
+
+  .text-gray-900 {
+    color: var(--color-slate-100) !important;
+  }
+
+  .text-gray-600,
+  .text-gray-500,
+  .text-slate-500,
+  .text-slate-600 {
+    color: var(--color-slate-400) !important;
+  }
+
+  /* Overrides for inputs and interactive states */
+  input[type="text"],
+  input[type="search"],
+  input[type="number"],
+  input[type="date"],
+  input[type="time"],
+  textarea,
+  select {
+    background-color: var(--color-slate-800) !important;
+    border-color: var(--color-slate-700) !important;
+    color: var(--color-slate-100) !important;
+
+    &:focus {
+      background-color: var(--color-slate-900) !important;
+      border-color: var(--color-blue-500) !important;
+    }
+
+    &::placeholder {
+      color: var(--color-slate-500) !important;
+    }
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: var(--color-blue-500) !important;
+    background-color: var(--color-slate-800) !important;
+    border-color: var(--color-slate-700) !important;
+  }
+
+  /* Status badges and pills */
+  .bg-emerald-50 {
+    background-color: rgba(16, 185, 129, 0.15) !important;
+    border-color: rgba(16, 185, 129, 0.3) !important;
+  }
+
+  .bg-amber-50 {
+    background-color: rgba(245, 158, 11, 0.15) !important;
+    border-color: rgba(245, 158, 11, 0.3) !important;
+  }
+
+  .bg-blue-50,
+  .bg-blue-50\/50,
+  .bg-blue-50\/40 {
+    background-color: rgba(59, 130, 246, 0.15) !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+  }
+
+  .bg-purple-50,
+  .bg-purple-50\/50,
+  .bg-purple-150,
+  .bg-purple-100,
+  .bg-purple-100\/50 {
+    background-color: rgba(139, 92, 246, 0.15) !important;
+    border-color: rgba(139, 92, 246, 0.3) !important;
+    color: var(--color-purple-400) !important;
+  }
+
+  .bg-rose-50,
+  .bg-rose-50\/50,
+  .bg-rose-50\/40,
+  .bg-red-50 {
+    background-color: rgba(244, 63, 94, 0.15) !important;
+    border-color: rgba(244, 63, 94, 0.3) !important;
+  }
+
+  .bg-slate-100\/80 {
+    background-color: var(--color-slate-800) !important;
+    border-color: var(--color-slate-700) !important;
+  }
+
+  /* High contrast colors for colored text in dark mode */
+  .text-emerald-600,
+  .text-emerald-700 {
+    color: var(--color-emerald-400) !important;
+  }
+
+  .text-amber-600,
+  .text-amber-700 {
+    color: var(--color-amber-400) !important;
+  }
+
+  .text-purple-600,
+  .text-purple-700,
+  .text-purple-800 {
+    color: var(--color-purple-400) !important;
+  }
+
+  .text-blue-600,
+  .text-blue-700 {
+    color: var(--color-blue-400) !important;
+  }
+
+  .text-rose-600,
+  .text-red-600 {
+    color: var(--color-rose-400) !important;
+  }
+
+  /* Table zebra-striping */
+  tr.bg-slate-50\/40,
+  tr.bg-slate-50 {
+    background-color: rgba(30, 41, 59, 0.2) !important;
+  }
+
+  /* Table headers */
+  .bg-slate-100 {
+    background-color: var(--color-slate-800) !important;
+  }
+
+  /* Sticky columns in spreadsheet-like tables */
+  thead th.sticky {
+    background-color: var(--color-slate-800) !important;
+    box-shadow: 1px 0 0 0 var(--color-slate-700) !important;
+    color: var(--color-slate-200) !important;
+  }
+
+  tbody td.sticky {
+    box-shadow: 1px 0 0 0 var(--color-slate-700) !important;
+  }
+
+  tbody tr:nth-child(even) td.sticky {
+    background-color: var(--color-slate-950) !important;
+  }
+
+  tbody tr:nth-child(odd) td.sticky {
+    background-color: var(--color-slate-900) !important;
+  }
+
+  tbody tr:hover td.sticky {
+    background-color: var(--color-slate-800) !important;
+  }
+
+  /* Hover effects */
+  .hover\:bg-slate-50:hover {
+    background-color: var(--color-slate-800) !important;
+  }
+
+  .hover\:bg-slate-100:hover {
+    background-color: var(--color-slate-800) !important;
+  }
+
+  .hover\:bg-gray-100:hover {
+    background-color: var(--color-slate-800) !important;
+  }
+
+  .hover\:bg-blue-50\/40:hover {
+    background-color: var(--color-slate-800) !important;
+  }
+
+  .hover\:bg-blue-50:hover {
+    background-color: var(--color-slate-800) !important;
+  }
+
+  .hover\:bg-blue-100:hover {
+    background-color: var(--color-slate-800) !important;
+  }
+
+  .hover\:bg-slate-50\/50:hover,
+  .hover\:bg-slate-50\/40:hover {
+    background-color: var(--color-slate-800) !important;
+  }
+
+  /* Divides */
+  .divide-gray-100>*+*,
+  .divide-gray-200>*+* {
+    border-color: var(--color-slate-800) !important;
+  }
+
+  .divide-y>*+* {
+    border-color: var(--color-slate-800) !important;
+  }
+
+  .divide-x>*+* {
+    border-color: var(--color-slate-800) !important;
+  }
+
+  /* Scrollbars and subtle details */
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-slate-700) !important;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--color-slate-900) !important;
+  }
+}
+=======
+>>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
