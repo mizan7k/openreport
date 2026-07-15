@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Bell, User, ChevronDown, CheckCircle, Clock } from 'lucide-react';
+import { Search, Bell, ChevronDown, Clock } from 'lucide-react';
 import { Shift } from '../types';
 
 interface TopNavProps {
@@ -13,7 +13,6 @@ interface TopNavProps {
 export function TopNav({ onSearch, activeShift, setActiveShift, notificationsCount, shifts }: TopNavProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [showShiftDropdown, setShowShiftDropdown] = useState(false);
-  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
 
   // Map dynamic shift configurations to standardized display strings
@@ -135,49 +134,7 @@ export function TopNav({ onSearch, activeShift, setActiveShift, notificationsCou
           )}
         </div>
 
-        {/* Divider */}
-        <div className="h-6 w-px bg-gray-200 dark:bg-slate-800" />
 
-        {/* User Profile */}
-        <div className="relative">
-          <button
-            onClick={() => setShowProfileDropdown(!showProfileDropdown)}
-            onBlur={() => setTimeout(() => setShowProfileDropdown(false), 200)}
-            className="flex items-center gap-2 text-left hover:bg-slate-50 dark:hover:bg-slate-800 p-1 rounded-sm cursor-pointer"
-            id="profile-dropdown-btn"
-          >
-            <div className="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-gray-600 dark:text-slate-300 font-bold text-[10px] border border-gray-300 dark:border-slate-700">
-              AM
-            </div>
-            <div className="hidden sm:block">
-              <p className="text-[11px] font-semibold text-gray-800 dark:text-slate-200 leading-tight">Alex Mercer</p>
-              <p className="text-[9px] text-gray-400 dark:text-slate-500 font-mono leading-none">Admin Lead</p>
-            </div>
-            <ChevronDown className="w-3 h-3 text-gray-400" />
-          </button>
-
-          {showProfileDropdown && (
-            <div className="absolute right-0 mt-1 w-48 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded shadow-md z-50 py-1 divide-y divide-gray-100 dark:divide-slate-800">
-              <div className="px-3 py-2">
-                <p className="text-[11px] text-gray-500 dark:text-slate-400 font-mono">Signed in as:</p>
-                <p className="text-[11px] font-semibold text-gray-800 dark:text-slate-200">alex.mercer@srs.office</p>
-              </div>
-              <div className="py-1">
-                <button className="w-full text-left px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 text-[11px] text-gray-700 dark:text-slate-300">
-                  My Profile
-                </button>
-                <button className="w-full text-left px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 text-[11px] text-gray-700 dark:text-slate-300">
-                  Preferences
-                </button>
-              </div>
-              <div className="py-1">
-                <button className="w-full text-left px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 text-[11px] text-red-600 dark:text-red-400 font-semibold">
-                  Lock Workspace
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
       </div>
     </header>
   );

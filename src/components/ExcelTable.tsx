@@ -85,9 +85,9 @@ export function ExcelTable<T extends object>({
           <span className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-100 font-semibold uppercase">
             TanStack Table v9
           </span>
-          <span>â€¢</span>
+          <span>•</span>
           <span>Total Rows: {data.length}</span>
-          <span>â€¢</span>
+          <span>•</span>
           <span>Filtered: {table.getFilteredRowModel().rows.length}</span>
         </div>
       </div>

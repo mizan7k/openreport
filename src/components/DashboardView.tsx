@@ -309,7 +309,7 @@ export function DashboardView({ logs, employees, onNavigate, onUpdateLog }: Dash
           </div>
           <div className="mt-2">
             <p className="text-xl font-mono font-bold text-gray-800">{metrics.callsReceived}</p>
-            <span className="text-[9px] text-green-600 dark:text-green-400 font-mono font-bold">â–² Live Inflow</span>
+            <span className="text-[9px] text-green-600 dark:text-green-400 font-mono font-bold">▲ Live Inflow</span>
           </div>
         </div>
 
@@ -379,7 +379,7 @@ export function DashboardView({ logs, employees, onNavigate, onUpdateLog }: Dash
       {/* MID SECTION: PREVIEW TABLES (SHEET SECTIONS) */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4" id="mid-section">
         {/* Recent Work Logs Table (2 cols span) */}
-        <div className="xl:col-span-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs flex flex-col">
+        <div className="xl:col-span-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs">
           <div className="px-3 py-2 border-b border-gray-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 flex items-center justify-between">
             <h3 className="font-semibold text-gray-700 dark:text-slate-200 font-sans flex items-center gap-1.5 text-xs">
               <span className="w-2 h-2 rounded-full bg-blue-500"></span>
@@ -389,10 +389,10 @@ export function DashboardView({ logs, employees, onNavigate, onUpdateLog }: Dash
               onClick={() => onNavigate('worklogs-history')}
               className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-mono text-[10px] uppercase font-bold"
             >
-              View Full Sheet â†’
+              View Full Sheet →
             </button>
           </div>
-          <div className="flex-1">
+          <div className="overflow-auto">
             <ExcelTable id="recent-logs" data={recentLogs} columns={recentLogsColumns} />
           </div>
         </div>
@@ -444,7 +444,7 @@ export function DashboardView({ logs, employees, onNavigate, onUpdateLog }: Dash
                 onClick={() => onNavigate('manager-performance')}
                 className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-mono text-[10px] uppercase font-bold"
               >
-                View Analytics â†’
+                View Analytics →
               </button>
             </div>
             <div className="p-2">
@@ -486,7 +486,7 @@ export function DashboardView({ logs, employees, onNavigate, onUpdateLog }: Dash
             onClick={() => onNavigate('worklogs-pending')}
             className="text-blue-600 hover:text-blue-800 font-mono text-[10px] uppercase font-bold"
           >
-            View Work Queue â†’
+            View Work Queue →
           </button>
         </div>
         <div className="flex-1">

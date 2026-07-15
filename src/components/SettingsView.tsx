@@ -446,7 +446,7 @@ export function SettingsView({ shifts, onShiftsChange, isDarkMode = false, onTog
           <div className="mt-4 pt-3 border-t border-emerald-500/40 dark:border-emerald-700/40 flex flex-wrap items-center justify-between gap-2 text-[10px] font-mono">
             <span>Operational Reporting Suite</span>
             <span>
-              built with â¤ï¸ by{' '}
+              built with ❤️ by{' '}
               <a
                 href="https://github.com/mizan7k"
                 target="_blank"

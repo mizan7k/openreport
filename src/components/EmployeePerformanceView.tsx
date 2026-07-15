@@ -176,7 +176,7 @@ export function EmployeePerformanceView({ logs, employees }: EmployeePerformance
             <TrendingUp className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             <span>Support Performance Ledger (Spreadsheet Grid)</span>
           </h3>
-          <div className="text-[10px] text-gray-400 dark:text-slate-500 font-mono">All rows sortable â€¢ Filters active</div>
+          <div className="text-[10px] text-gray-400 dark:text-slate-500 font-mono">All rows sortable • Filters active</div>
         </div>
         <div className="flex-1">
           <ExcelTable id="performance-excel" data={performances} columns={performanceColumns} globalFilterPlaceholder="Filter employees..." />

@@ -324,7 +324,7 @@ export function WorkLogsView({ logs, employees, onAddLog, onDeleteLog, onUpdateL
       accessorKey: 'time',
       header: 'Time',
       size: 65,
-      cell: info => <span className="font-mono text-gray-500 font-semibold">{info.getValue() as string || 'â€”'}</span>
+      cell: info => <span className="font-mono text-gray-500 font-semibold">{info.getValue() as string || '—'}</span>
     },
     {
       accessorKey: 'employeeName',
@@ -437,7 +437,7 @@ export function WorkLogsView({ logs, employees, onAddLog, onDeleteLog, onUpdateL
       accessorKey: 'notes',
       header: 'Notes',
       size: 200,
-      cell: info => <p className="text-gray-500 truncate text-[11px] max-w-[180px]" title={info.getValue() as string}>{info.getValue() as string || 'â€”'}</p>
+      cell: info => <p className="text-gray-500 truncate text-[11px] max-w-[180px]" title={info.getValue() as string}>{info.getValue() as string || '—'}</p>
     },
     {
       id: 'delete-action',
@@ -574,7 +574,7 @@ export function WorkLogsView({ logs, employees, onAddLog, onDeleteLog, onUpdateL
                   <span>
                     {accountability.workingRemaining > 0 
                       ? `${accountability.workingRemaining} mins remaining` 
-                      : 'âœ… Shift Goal Met'}
+                      : '✅ Shift Goal Met'}
                   </span>
                 </div>
               </div>
@@ -598,7 +598,7 @@ export function WorkLogsView({ logs, employees, onAddLog, onDeleteLog, onUpdateL
                   <span>
                     {accountability.breakRemaining > 0 
                       ? `${accountability.breakRemaining} mins remaining` 
-                      : 'âœ… Break Goal Met'}
+                      : '✅ Break Goal Met'}
                   </span>
                 </div>
               </div>
@@ -1109,7 +1109,7 @@ export function WorkLogsView({ logs, employees, onAddLog, onDeleteLog, onUpdateL
               <div className="space-y-1">
                 <span className="text-[10px] text-gray-400 dark:text-slate-500 font-mono uppercase font-bold">Task Notes / Remarks</span>
                 <p className="text-xs bg-slate-50/50 dark:bg-slate-800/50 p-2.5 rounded-sm border border-slate-100 dark:border-slate-700 text-gray-700 dark:text-slate-200 leading-relaxed font-sans min-h-[50px] whitespace-pre-wrap">
-                  {selectedTaskLog.notes || 'â€” No notes logged for this support entry â€”'}
+                  {selectedTaskLog.notes || '— No notes logged for this support entry —'}
                 </p>
               </div>
 

@@ -112,7 +112,7 @@ export function Sidebar({ currentView, setView, pendingCount, logs, isManagerUnl
                 {!isCollapsed && <span>Dashboard</span>}
               </div>
               {!isCollapsed && (
-                <span className="text-[10px] bg-gray-200/60 text-gray-500 px-1.5 py-0.2 rounded font-mono font-semibold">F1</span>
+                <span className="text-[10px] bg-indigo-100 dark:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 px-1.5 py-0.5 rounded-full font-mono font-semibold border border-indigo-200 dark:border-indigo-700">F1</span>
               )}
               
               {/* Collapsed Tooltip */}
