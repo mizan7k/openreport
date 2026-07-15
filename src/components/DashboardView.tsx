@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 import React, { useState, useEffect, useMemo } from 'react';
 import { WorkLog, EmployeePerformance } from '../types';
 import { ExcelTable } from './ExcelTable';
 import { ColumnDef } from '@tanstack/react-table';
 import { PhoneCall, CheckSquare, PlusSquare, AlertOctagon, HelpCircle, FileCheck, ArrowRightLeft, TrendingUp, Clock } from 'lucide-react';
-=======
-import React, { useMemo } from 'react';
-import { WorkLog, EmployeePerformance } from '../types';
-import { ExcelTable } from './ExcelTable';
-import { ColumnDef } from '@tanstack/react-table';
-import { PhoneCall, CheckSquare, PlusSquare, AlertOctagon, HelpCircle, FileCheck, ArrowRightLeft, TrendingUp } from 'lucide-react';
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
 import { getEmployeePerformance, INITIAL_WORK_LOGS } from '../data';
 
 interface DashboardViewProps {
@@ -20,7 +12,6 @@ interface DashboardViewProps {
 }
 
 export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewProps) {
-<<<<<<< HEAD
   // Live Clock Ticker
   const [time, setTime] = useState(new Date());
 
@@ -45,8 +36,6 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
     day: 'numeric'
   });
 
-=======
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
   // 1. Dynamic Metric Calculations
   const metrics = useMemo(() => {
     const todayStr = '2026-07-14';
@@ -191,11 +180,7 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
           val === 'Pending' ? 'bg-amber-50 text-amber-700 border-amber-200' :
           'bg-blue-50 text-blue-700 border-blue-200';
         return (
-<<<<<<< HEAD
           <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold border dark:border-slate-700 ${color}`}>
-=======
-          <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold border ${color}`}>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
             {val}
           </span>
         );
@@ -218,11 +203,7 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
       accessorKey: 'notes',
       header: 'Summary Notes',
       size: 250,
-<<<<<<< HEAD
       cell: info =>             <span className="text-gray-500 dark:text-slate-400 font-sans truncate block max-w-xs">{info.getValue() as string}</span>
-=======
-      cell: info => <span className="text-gray-500 font-sans truncate block max-w-xs">{info.getValue() as string}</span>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
     }
   ], []);
 
@@ -242,11 +223,7 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
       accessorKey: 'minutes',
       header: 'Time Open',
       size: 80,
-<<<<<<< HEAD
       cell: info =>                   <span className="font-mono text-amber-700 dark:text-amber-400">{info.getValue() as number} mins</span>
-=======
-      cell: info => <span className="font-mono text-amber-700">{info.getValue() as number} mins</span>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
     },
     {
       accessorKey: 'category',
@@ -268,11 +245,7 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
             // Update state to solved
             onUpdateLog(row.original.uniqueId, { status: 'Solved' });
           }}
-<<<<<<< HEAD
           className="text-[10px] bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-slate-800 text-blue-700 dark:text-blue-400 font-mono px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800 cursor-pointer"
-=======
-          className="text-[10px] bg-blue-50 hover:bg-blue-100 text-blue-700 font-mono px-2 py-0.5 rounded border border-blue-200 cursor-pointer"
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
         >
           Mark Solved
         </button>
@@ -281,21 +254,12 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
   ], [onUpdateLog]);
 
   return (
-<<<<<<< HEAD
     <div className="flex-1 overflow-y-auto p-4 bg-slate-50 dark:bg-slate-950 space-y-4" id="dashboard-view-container">
       {/* View Title & Breadcrumb */}
       <div className="flex justify-between items-center border-b border-gray-200 dark:border-slate-800 pb-3" id="dashboard-view-header">
         <div>
           <h2 className="text-lg font-semibold text-gray-800 dark:text-slate-100" id="dashboard-view-title">Dashboard Overview</h2>
           <p className="text-xs text-gray-500 dark:text-slate-400 font-mono">WORKSPACE_ROOT / DASHBOARD_SHEET / SHEET1</p>
-=======
-    <div className="flex-1 overflow-y-auto p-4 bg-slate-50 space-y-4" id="dashboard-view-container">
-      {/* View Title & Breadcrumb */}
-      <div className="flex justify-between items-center border-b border-gray-200 pb-3" id="dashboard-view-header">
-        <div>
-          <h2 className="text-lg font-semibold text-gray-800" id="dashboard-view-title">Dashboard Overview</h2>
-          <p className="text-xs text-gray-500 font-mono">WORKSPACE_ROOT / DASHBOARD_SHEET / SHEET1</p>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
         </div>
         <div className="flex items-center gap-2">
           <button 
@@ -306,18 +270,13 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
           </button>
           <button 
             onClick={() => onNavigate('manager-review')}
-<<<<<<< HEAD
             className="bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-gray-700 dark:text-slate-200 text-xs font-medium px-3 py-1.5 rounded border border-gray-200 dark:border-slate-700 shadow-sm cursor-pointer"
-=======
-            className="bg-white hover:bg-slate-50 text-gray-700 text-xs font-medium px-3 py-1.5 rounded border border-gray-200 shadow-sm cursor-pointer"
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           >
             Run Review Flow
           </button>
         </div>
       </div>
 
-<<<<<<< HEAD
       {/* Live Digital Clock & Greeting Banner */}
       <div className="bg-gradient-to-r from-slate-800 to-indigo-900 rounded border border-slate-700 p-4 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm" id="dashboard-live-clock-banner">
         <div className="space-y-1">
@@ -349,49 +308,24 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
           </div>
           <div className="mt-2">
             <p className="text-xl font-mono font-bold text-gray-800">{metrics.callsReceived}</p>
-            <span className="text-[9px] text-green-600 dark:text-green-400 font-mono font-bold">▲ Live Inflow</span>
-=======
-      {/* KPI STATISTICS METRIC GRID (Excel Style Cards) */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2" id="kpi-grid">
-        {/* Cell 1: Calls Received */}
-        <div className="bg-white p-3 border border-gray-200 rounded-sm shadow-2xs flex flex-col justify-between">
-          <div className="flex justify-between items-start">
-            <span className="text-[10px] font-mono text-gray-400 font-bold uppercase">Calls Received</span>
-            <PhoneCall className="w-3.5 h-3.5 text-gray-400" />
-          </div>
-          <div className="mt-2">
-            <p className="text-xl font-mono font-bold text-gray-800">{metrics.callsReceived}</p>
-            <span className="text-[9px] text-green-600 font-mono font-bold">▲ Live Inflow</span>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
+            <span className="text-[9px] text-green-600 dark:text-green-400 font-mono font-bold">â–² Live Inflow</span>
           </div>
         </div>
 
         {/* Cell 2: Calls Dialed */}
-<<<<<<< HEAD
         <div className="bg-white dark:bg-slate-900 p-3 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs flex flex-col justify-between">
-=======
-        <div className="bg-white p-3 border border-gray-200 rounded-sm shadow-2xs flex flex-col justify-between">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           <div className="flex justify-between items-start">
             <span className="text-[10px] font-mono text-gray-400 font-bold uppercase">Calls Dialed</span>
             <ArrowRightLeft className="w-3.5 h-3.5 text-gray-400" />
           </div>
           <div className="mt-2">
             <p className="text-xl font-mono font-bold text-gray-800">{metrics.callsDialed}</p>
-<<<<<<< HEAD
             <span className="text-[9px] text-gray-400 dark:text-slate-500 font-mono">Outgoing callbacks</span>
-=======
-            <span className="text-[9px] text-gray-400 font-mono">Outgoing callbacks</span>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           </div>
         </div>
 
         {/* Cell 3: Tasks Created */}
-<<<<<<< HEAD
         <div className="bg-white dark:bg-slate-900 p-3 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs flex flex-col justify-between">
-=======
-        <div className="bg-white p-3 border border-gray-200 rounded-sm shadow-2xs flex flex-col justify-between">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           <div className="flex justify-between items-start">
             <span className="text-[10px] font-mono text-gray-400 font-bold uppercase">Tasks Created</span>
             <PlusSquare className="w-3.5 h-3.5 text-gray-400" />
@@ -403,11 +337,7 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
         </div>
 
         {/* Cell 4: Tasks Solved */}
-<<<<<<< HEAD
         <div className="bg-white dark:bg-slate-900 p-3 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs flex flex-col justify-between">
-=======
-        <div className="bg-white p-3 border border-gray-200 rounded-sm shadow-2xs flex flex-col justify-between">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           <div className="flex justify-between items-start">
             <span className="text-[10px] font-mono text-gray-400 font-bold uppercase">Tasks Solved</span>
             <CheckSquare className="w-3.5 h-3.5 text-emerald-500" />
@@ -421,11 +351,7 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
         </div>
 
         {/* Cell 5: Pending Tasks */}
-<<<<<<< HEAD
         <div className="bg-white dark:bg-slate-900 p-3 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs flex flex-col justify-between">
-=======
-        <div className="bg-white p-3 border border-gray-200 rounded-sm shadow-2xs flex flex-col justify-between">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           <div className="flex justify-between items-start">
             <span className="text-[10px] font-mono text-gray-400 font-bold uppercase">Pending Tasks</span>
             <AlertOctagon className="w-3.5 h-3.5 text-amber-500" />
@@ -437,22 +363,14 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
         </div>
 
         {/* Cell 6: Old Tasks Solved */}
-<<<<<<< HEAD
         <div className="bg-white dark:bg-slate-900 p-3 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs flex flex-col justify-between">
-=======
-        <div className="bg-white p-3 border border-gray-200 rounded-sm shadow-2xs flex flex-col justify-between">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           <div className="flex justify-between items-start">
             <span className="text-[10px] font-mono text-gray-400 font-bold uppercase">Old Solved</span>
             <HelpCircle className="w-3.5 h-3.5 text-purple-400" />
           </div>
           <div className="mt-2">
             <p className="text-xl font-mono font-bold text-purple-700">{metrics.oldTasksSolved}</p>
-<<<<<<< HEAD
             <span className="text-[9px] text-purple-600 dark:text-purple-400 font-mono">Backlog cleaned</span>
-=======
-            <span className="text-[9px] text-purple-600 font-mono">Backlog cleaned</span>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           </div>
         </div>
       </div>
@@ -460,27 +378,17 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
       {/* MID SECTION: PREVIEW TABLES (SHEET SECTIONS) */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4" id="mid-section">
         {/* Recent Work Logs Table (2 cols span) */}
-<<<<<<< HEAD
         <div className="xl:col-span-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs flex flex-col">
           <div className="px-3 py-2 border-b border-gray-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 flex items-center justify-between">
             <h3 className="font-semibold text-gray-700 dark:text-slate-200 font-sans flex items-center gap-1.5 text-xs">
-=======
-        <div className="xl:col-span-2 bg-white border border-gray-200 rounded-sm shadow-2xs flex flex-col">
-          <div className="px-3 py-2 border-b border-gray-200 bg-slate-50 flex items-center justify-between">
-            <h3 className="font-semibold text-gray-700 font-sans flex items-center gap-1.5 text-xs">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
               <span className="w-2 h-2 rounded-full bg-blue-500"></span>
               Recent Work Logs Sheet (Last 5 Entries)
             </h3>
             <button
               onClick={() => onNavigate('worklogs-history')}
-<<<<<<< HEAD
               className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-mono text-[10px] uppercase font-bold"
-=======
-              className="text-blue-600 hover:text-blue-800 font-mono text-[10px] uppercase font-bold"
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
             >
-              View Full Sheet →
+              View Full Sheet â†’
             </button>
           </div>
           <div className="flex-1">
@@ -491,15 +399,9 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
         {/* Sidebar Mini Summaries: Review Summary & Top Performers */}
         <div className="space-y-4">
           {/* Manager Review Distribution Summary */}
-<<<<<<< HEAD
           <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs flex flex-col">
             <div className="px-3 py-2 border-b border-gray-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 flex items-center justify-between">
               <h3 className="font-semibold text-gray-700 dark:text-slate-200 font-sans flex items-center gap-1.5 text-xs">
-=======
-          <div className="bg-white border border-gray-200 rounded-sm shadow-2xs flex flex-col">
-            <div className="px-3 py-2 border-b border-gray-200 bg-slate-50 flex items-center justify-between">
-              <h3 className="font-semibold text-gray-700 font-sans flex items-center gap-1.5 text-xs">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
                 <FileCheck className="w-3.5 h-3.5 text-blue-600" />
                 Manager Review Audit Count
               </h3>
@@ -531,27 +433,17 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
           </div>
 
           {/* Top Team Performers Sheet */}
-<<<<<<< HEAD
           <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs flex flex-col">
             <div className="px-3 py-2 border-b border-gray-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 flex items-center justify-between">
               <h3 className="font-semibold text-gray-700 dark:text-slate-200 font-sans flex items-center gap-1.5 text-xs">
-=======
-          <div className="bg-white border border-gray-200 rounded-sm shadow-2xs flex flex-col">
-            <div className="px-3 py-2 border-b border-gray-200 bg-slate-50 flex items-center justify-between">
-              <h3 className="font-semibold text-gray-700 font-sans flex items-center gap-1.5 text-xs">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
                 <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
                 Team Performance Highlights
               </h3>
               <button
                 onClick={() => onNavigate('manager-performance')}
-<<<<<<< HEAD
                 className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-mono text-[10px] uppercase font-bold"
-=======
-                className="text-blue-600 hover:text-blue-800 font-mono text-[10px] uppercase font-bold"
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
               >
-                View Analytics →
+                View Analytics â†’
               </button>
             </div>
             <div className="p-2">
@@ -569,11 +461,7 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
                       <td className="px-3 py-1.5 font-sans font-medium text-gray-700">{emp.employeeName}</td>
                       <td className="px-3 py-1.5 text-right font-semibold text-gray-600">{emp.totalMinutes}m</td>
                       <td className="px-3 py-1.5 text-right">
-<<<<<<< HEAD
                         <span className="bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-150 dark:border-emerald-800 px-1 rounded font-bold text-[10px]">
-=======
-                        <span className="bg-emerald-50 text-emerald-700 border border-emerald-150 px-1 rounded font-bold text-[10px]">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
                           {emp.resolutionRate}%
                         </span>
                       </td>
@@ -588,13 +476,8 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
 
       {/* BOTTOM SECTION: PENDING TASKS SPREADSHEET */}
       <div className="bg-white border border-gray-200 rounded-sm shadow-2xs flex flex-col" id="pending-tasks-section">
-<<<<<<< HEAD
         <div className="px-3 py-2 border-b border-gray-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 flex items-center justify-between">
           <h3 className="font-semibold text-gray-700 dark:text-slate-200 font-sans flex items-center gap-1.5 text-xs">
-=======
-        <div className="px-3 py-2 border-b border-gray-200 bg-slate-50 flex items-center justify-between">
-          <h3 className="font-semibold text-gray-700 font-sans flex items-center gap-1.5 text-xs">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
             <span className="w-2 h-2 rounded-full bg-amber-500"></span>
             Unresolved Pending Support Queues
           </h3>
@@ -602,7 +485,7 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
             onClick={() => onNavigate('worklogs-pending')}
             className="text-blue-600 hover:text-blue-800 font-mono text-[10px] uppercase font-bold"
           >
-            View Work Queue →
+            View Work Queue â†’
           </button>
         </div>
         <div className="flex-1">

@@ -271,7 +271,7 @@ export function ManagerReevaluationView({ logs, onUpdateLog }: ManagerReevaluati
                     Original Agent Notes
                   </span>
                   <p className="text-xs text-gray-700 dark:text-slate-200 leading-relaxed font-sans whitespace-pre-wrap">
-                    {selectedLog.notes || '— No notes logged for this support entry —'}
+                    {selectedLog.notes || 'â€” No notes logged for this support entry â€”'}
                   </p>
                 </div>
 

@@ -132,27 +132,17 @@ export function EmployeePerformanceView({ logs }: EmployeePerformanceViewProps) 
   ], []);
 
   return (
-<<<<<<< HEAD
     <div className="flex-1 overflow-y-auto p-4 bg-slate-50 dark:bg-slate-950 space-y-4" id="team-performance-container">
       {/* Title */}
       <div className="border-b border-gray-200 dark:border-slate-800 pb-3 flex justify-between items-center">
         <div>
           <h2 className="text-lg font-semibold text-gray-800 dark:text-slate-100">Support Representative Performance Sheets</h2>
           <p className="text-xs text-gray-500 dark:text-slate-400 font-mono">Consolidated telemetry metrics, log counts, call records, and quality scores calculated dynamically from support records.</p>
-=======
-    <div className="flex-1 overflow-y-auto p-4 bg-slate-50 space-y-4" id="team-performance-container">
-      {/* Title */}
-      <div className="border-b border-gray-200 pb-3 flex justify-between items-center">
-        <div>
-          <h2 className="text-lg font-semibold text-gray-800">Support Representative Performance Sheets</h2>
-          <p className="text-xs text-gray-500 font-mono">Consolidated telemetry metrics, log counts, call records, and quality scores calculated dynamically from support records.</p>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
         </div>
       </div>
 
       {/* Overview Metric Row */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-2" id="perf-summary-cards">
-<<<<<<< HEAD
         <div className="bg-white dark:bg-slate-900 p-3 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs">
           <p className="text-[10px] font-mono font-bold text-gray-400 dark:text-slate-500 uppercase">Total Calls Handled</p>
           <p className="text-xl font-mono font-bold text-gray-800 dark:text-slate-100 mt-1">{supportCenterStats.totalCalls}</p>
@@ -175,51 +165,17 @@ export function EmployeePerformanceView({ logs }: EmployeePerformanceViewProps) 
           <p className="text-[10px] font-mono font-bold text-gray-400 dark:text-slate-500 uppercase">Audit Perfect QA Marks</p>
           <p className="text-xl font-mono font-bold text-indigo-600 dark:text-indigo-400 mt-1">{supportCenterStats.perfectReviews}</p>
           <span className="text-[9px] text-indigo-600 dark:text-indigo-400 font-mono font-semibold">Exemplary resolutions</span>
-=======
-        <div className="bg-white p-3 border border-gray-200 rounded-sm shadow-2xs">
-          <p className="text-[10px] font-mono font-bold text-gray-400 uppercase">Total Calls Handled</p>
-          <p className="text-xl font-mono font-bold text-gray-800 mt-1">{supportCenterStats.totalCalls}</p>
-          <span className="text-[9px] text-gray-500 font-mono">Inbound + Outbound</span>
-        </div>
-
-        <div className="bg-white p-3 border border-gray-200 rounded-sm shadow-2xs">
-          <p className="text-[10px] font-mono font-bold text-gray-400 uppercase">Representative Logging Hours</p>
-          <p className="text-xl font-mono font-bold text-gray-800 mt-1">{Math.round(supportCenterStats.totalMinutes / 60)} hrs</p>
-          <span className="text-[9px] text-gray-500 font-mono">Active tracking minutes: {supportCenterStats.totalMinutes}</span>
-        </div>
-
-        <div className="bg-white p-3 border border-gray-200 rounded-sm shadow-2xs">
-          <p className="text-[10px] font-mono font-bold text-gray-400 uppercase">Average Center SLA %</p>
-          <p className="text-xl font-mono font-bold text-emerald-600 mt-1">{supportCenterStats.avgResolutionRate}%</p>
-          <span className="text-[9px] text-emerald-600 font-mono font-semibold">SLA Target: 85% Met</span>
-        </div>
-
-        <div className="bg-white p-3 border border-gray-200 rounded-sm shadow-2xs">
-          <p className="text-[10px] font-mono font-bold text-gray-400 uppercase">Audit Perfect QA Marks</p>
-          <p className="text-xl font-mono font-bold text-indigo-600 mt-1">{supportCenterStats.perfectReviews}</p>
-          <span className="text-[9px] text-indigo-600 font-mono font-semibold">Exemplary resolutions</span>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
         </div>
       </div>
 
       {/* Main Excel Sheet Grid */}
-<<<<<<< HEAD
       <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs flex flex-col">
         <div className="px-3 py-2 border-b border-gray-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 flex items-center justify-between">
           <h3 className="font-semibold text-gray-700 dark:text-slate-200 font-sans flex items-center gap-1.5 text-xs">
             <TrendingUp className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             <span>Support Performance Ledger (Spreadsheet Grid)</span>
           </h3>
-          <div className="text-[10px] text-gray-400 dark:text-slate-500 font-mono">All rows sortable • Filters active</div>
-=======
-      <div className="bg-white border border-gray-200 rounded-sm shadow-2xs flex flex-col">
-        <div className="px-3 py-2 border-b border-gray-200 bg-slate-50 flex items-center justify-between">
-          <h3 className="font-semibold text-gray-700 font-sans flex items-center gap-1.5 text-xs">
-            <TrendingUp className="w-4 h-4 text-blue-600" />
-            <span>Support Performance Ledger (Spreadsheet Grid)</span>
-          </h3>
-          <div className="text-[10px] text-gray-400 font-mono">All rows sortable • Filters active</div>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
+          <div className="text-[10px] text-gray-400 dark:text-slate-500 font-mono">All rows sortable â€¢ Filters active</div>
         </div>
         <div className="flex-1">
           <ExcelTable id="performance-excel" data={performances} columns={performanceColumns} globalFilterPlaceholder="Filter employees..." />

@@ -85,9 +85,9 @@ export function ExcelTable<T extends object>({
           <span className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-100 font-semibold uppercase">
             TanStack Table v9
           </span>
-          <span>•</span>
+          <span>â€¢</span>
           <span>Total Rows: {data.length}</span>
-          <span>•</span>
+          <span>â€¢</span>
           <span>Filtered: {table.getFilteredRowModel().rows.length}</span>
         </div>
       </div>
@@ -96,11 +96,7 @@ export function ExcelTable<T extends object>({
       <div className="overflow-auto relative border-b border-gray-200 max-h-[500px]" style={{ scrollbarWidth: 'thin' }}>
         <table className="w-full border-collapse text-left table-fixed" style={{ minWidth: '850px' }}>
           {/* Header Row */}
-<<<<<<< HEAD
           <thead className="sticky top-0 z-10 bg-slate-100 dark:bg-slate-800 shadow-[0_1px_0_0_rgba(226,232,240,1)] dark:shadow-[0_1px_0_0_rgba(51,65,85,1)]">
-=======
-          <thead className="sticky top-0 z-10 bg-slate-100 shadow-[0_1px_0_0_rgba(226,232,240,1)]">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id} className="divide-x divide-gray-200">
                 {headerGroup.headers.map((header, colIndex) => {
@@ -110,11 +106,7 @@ export function ExcelTable<T extends object>({
                       key={header.id}
                       className={`px-3 py-2 text-gray-600 font-semibold tracking-wider select-none align-middle relative border-b border-gray-200 text-[11px] ${
                         isFirstColSticky 
-<<<<<<< HEAD
                           ? 'sticky left-0 bg-slate-100 dark:bg-slate-800 z-20 shadow-[1px_0_0_0_rgba(226,232,240,1)] dark:shadow-[1px_0_0_0_rgba(51,65,85,1)]' 
-=======
-                          ? 'sticky left-0 bg-slate-100 z-20 shadow-[1px_0_0_0_rgba(226,232,240,1)]' 
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
                           : ''
                       }`}
                       style={{ width: header.getSize() ? `${header.getSize()}px` : 'auto' }}
@@ -172,11 +164,7 @@ export function ExcelTable<T extends object>({
                         key={cell.id}
                         className={`px-3 py-1.5 text-gray-700 truncate align-middle border-b border-gray-100 font-mono text-[11px] ${
                           isFirstColSticky
-<<<<<<< HEAD
                             ? `sticky left-0 z-10 shadow-[1px_0_0_0_rgba(226,232,240,1)] dark:shadow-[1px_0_0_0_rgba(51,65,85,1)] ${
-=======
-                            ? `sticky left-0 z-10 shadow-[1px_0_0_0_rgba(226,232,240,1)] ${
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
                                 rowIndex % 2 === 0 ? 'bg-white' : 'bg-slate-50'
                               } group-hover:bg-blue-50/40`
                             : ''

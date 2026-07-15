@@ -1,9 +1,5 @@
 import React, { useState, useMemo } from 'react';
-<<<<<<< HEAD
 import { ViewType, WorkLog, Shift } from './types';
-=======
-import { ViewType, WorkLog } from './types';
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
 import { INITIAL_WORK_LOGS } from './data';
 import { Sidebar } from './components/Sidebar';
 import { TopNav } from './components/TopNav';
@@ -11,10 +7,7 @@ import { DashboardView } from './components/DashboardView';
 import { WorkLogsView } from './components/WorkLogsView';
 import { ManagerReviewView } from './components/ManagerReviewView';
 import { EmployeePerformanceView } from './components/EmployeePerformanceView';
-<<<<<<< HEAD
 import { ManagerReevaluationView } from './components/ManagerReevaluationView';
-=======
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
 import { ReportsView } from './components/ReportsView';
 import { EmployeesSheetView } from './components/EmployeesSheetView';
 import { SettingsView } from './components/SettingsView';
@@ -23,7 +16,6 @@ export default function App() {
   // Navigation View
   const [currentView, setView] = useState<ViewType>('dashboard');
 
-<<<<<<< HEAD
   // Dark Mode preference
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     return localStorage.getItem('theme') === 'dark';
@@ -52,13 +44,6 @@ export default function App() {
 
   // Active shift configuration (Set initial default active shift to Shift 1)
   const [activeShift, setActiveShift] = useState('Shift 1 (11:00 AM - 07:00 PM)');
-=======
-  // Logs database memory (starts with realistic initial records)
-  const [logs, setLogs] = useState<WorkLog[]>(INITIAL_WORK_LOGS);
-
-  // Active shift configuration
-  const [activeShift, setActiveShift] = useState('Morning Shift (08:00 - 16:00)');
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
 
   // Global search input state (prop-drilled or filtered at layout level)
   const [globalSearchTerm, setGlobalSearchTerm] = useState('');
@@ -84,11 +69,7 @@ export default function App() {
   }, [logs]);
 
   const notificationsCount = useMemo(() => {
-<<<<<<< HEAD
     return logs.filter((l) => l.managerReview === 'Pending Review' || l.reviewRequestStatus === 'Pending').length;
-=======
-    return logs.filter((l) => l.managerReview === 'Pending Review').length;
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
   }, [logs]);
 
   // 3. Layout Router
@@ -109,14 +90,10 @@ export default function App() {
             logs={logs}
             onAddLog={handleAddLog}
             onDeleteLog={handleDeleteLog}
-<<<<<<< HEAD
             onUpdateLog={handleUpdateLog}
             activeSubView="add"
             shifts={shifts}
             activeShift={activeShift}
-=======
-            activeSubView="add"
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           />
         );
 
@@ -126,14 +103,10 @@ export default function App() {
             logs={logs}
             onAddLog={handleAddLog}
             onDeleteLog={handleDeleteLog}
-<<<<<<< HEAD
             onUpdateLog={handleUpdateLog}
             activeSubView="today"
             shifts={shifts}
             activeShift={activeShift}
-=======
-            activeSubView="today"
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           />
         );
 
@@ -143,14 +116,10 @@ export default function App() {
             logs={logs}
             onAddLog={handleAddLog}
             onDeleteLog={handleDeleteLog}
-<<<<<<< HEAD
             onUpdateLog={handleUpdateLog}
             activeSubView="pending"
             shifts={shifts}
             activeShift={activeShift}
-=======
-            activeSubView="pending"
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           />
         );
 
@@ -160,14 +129,10 @@ export default function App() {
             logs={logs}
             onAddLog={handleAddLog}
             onDeleteLog={handleDeleteLog}
-<<<<<<< HEAD
             onUpdateLog={handleUpdateLog}
             activeSubView="history"
             shifts={shifts}
             activeShift={activeShift}
-=======
-            activeSubView="history"
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           />
         );
 
@@ -179,7 +144,6 @@ export default function App() {
           />
         );
 
-<<<<<<< HEAD
       case 'manager-reevaluation':
         return (
           <ManagerReevaluationView
@@ -192,24 +156,13 @@ export default function App() {
         return <EmployeePerformanceView logs={logs} />;
 
       case 'reports':
-=======
-      case 'manager-performance':
-        return <EmployeePerformanceView logs={logs} />;
 
-      // Reports views (pre-configured with corresponding filter parameters inside ReportsView)
-      case 'reports-daily':
-      case 'reports-weekly':
-      case 'reports-monthly':
-      case 'reports-quarterly':
-      case 'reports-custom':
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
         return <ReportsView logs={logs} />;
 
       case 'employees':
         return <EmployeesSheetView />;
 
       case 'settings':
-<<<<<<< HEAD
         return (
           <SettingsView
             shifts={shifts}
@@ -218,9 +171,6 @@ export default function App() {
             onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
           />
         );
-=======
-        return <SettingsView />;
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
 
       default:
         return (
@@ -234,20 +184,13 @@ export default function App() {
   };
 
   return (
-<<<<<<< HEAD
     <div className="flex h-screen w-screen bg-slate-100 dark:bg-slate-950 overflow-hidden text-slate-800 dark:text-slate-100" id="main-app-container">
-=======
-    <div className="flex h-screen w-screen bg-slate-100 overflow-hidden text-slate-800" id="main-app-container">
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
       {/* Sidebar Panes */}
       <Sidebar
         currentView={currentView}
         setView={setView}
         pendingCount={pendingCount}
-<<<<<<< HEAD
         logs={logs}
-=======
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
       />
 
       {/* Main Workspace Frame */}
@@ -258,10 +201,7 @@ export default function App() {
           setActiveShift={setActiveShift}
           notificationsCount={notificationsCount}
           onSearch={(term) => setGlobalSearchTerm(term)}
-<<<<<<< HEAD
           shifts={shifts}
-=======
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
         />
 
         {/* Dynamic Sheet Workspaces */}

@@ -84,26 +84,16 @@ export function EmployeesSheetView() {
   ], []);
 
   return (
-<<<<<<< HEAD
     <div className="flex-1 overflow-y-auto p-4 bg-slate-50 dark:bg-slate-950 space-y-4" id="employees-sheet-container">
       {/* Title */}
       <div className="border-b border-gray-200 dark:border-slate-800 pb-3 flex justify-between items-center">
         <div>
           <h2 className="text-lg font-semibold text-gray-800 dark:text-slate-100">Support Representative Master Sheet</h2>
           <p className="text-xs text-gray-500 dark:text-slate-400 font-mono">Administrative master ledger containing employee IDs, tier alignments, roles, and status tracking.</p>
-=======
-    <div className="flex-1 overflow-y-auto p-4 bg-slate-50 space-y-4" id="employees-sheet-container">
-      {/* Title */}
-      <div className="border-b border-gray-200 pb-3 flex justify-between items-center">
-        <div>
-          <h2 className="text-lg font-semibold text-gray-800">Support Representative Master Sheet</h2>
-          <p className="text-xs text-gray-500 font-mono">Administrative master ledger containing employee IDs, tier alignments, roles, and status tracking.</p>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
         </div>
       </div>
 
       {/* Main Employee Excel Grid */}
-<<<<<<< HEAD
       <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-sm shadow-2xs flex flex-col">
         <div className="px-3 py-2 border-b border-gray-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 flex items-center justify-between">
           <h3 className="font-semibold text-gray-700 dark:text-slate-200 font-sans flex items-center gap-1.5 text-xs">
@@ -111,15 +101,6 @@ export function EmployeesSheetView() {
             <span>Support Representatives Ledger</span>
           </h3>
           <span className="text-[10px] text-gray-400 dark:text-slate-500 font-mono">Total Employee Records: {employeeData.length}</span>
-=======
-      <div className="bg-white border border-gray-200 rounded-sm shadow-2xs flex flex-col">
-        <div className="px-3 py-2 border-b border-gray-200 bg-slate-50 flex items-center justify-between">
-          <h3 className="font-semibold text-gray-700 font-sans flex items-center gap-1.5 text-xs">
-            <Users className="w-4 h-4 text-blue-600" />
-            <span>Support Representatives Ledger</span>
-          </h3>
-          <span className="text-[10px] text-gray-400 font-mono">Total Employee Records: {employeeData.length}</span>
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
         </div>
         <div className="flex-1">
           <ExcelTable id="employees-ledger" data={employeeData} columns={employeeColumns} globalFilterPlaceholder="Filter employee directory..." />

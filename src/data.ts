@@ -107,16 +107,12 @@ const RAW_INITIAL_WORK_LOGS = [
     notes: 'Assisted integration engineer with custom Webhook payload headers. Debugged HTTP 403 response.',
     date: '2026-07-13',
     managerReview: 'Error',
-<<<<<<< HEAD
     managerComments: 'Should have classified under API Integration instead of API Setup, but correct notes.',
     reviewRequestReason: 'My notes state clearly that the webhook integration configuration was tested, which falls perfectly under API Setup guidelines and matches our workflow template.',
     reviewRequestTime: '2026-07-14 11:24 AM',
     reviewRequestStatus: 'Pending',
     originalManagerReview: 'Error',
     originalManagerComments: 'Should have classified under API Integration instead of API Setup, but correct notes.'
-=======
-    managerComments: 'Should have classified under API Integration instead of API Setup, but correct notes.'
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
   },
   {
     id: 'TSK-1029',
@@ -139,7 +135,6 @@ const RAW_INITIAL_WORK_LOGS = [
     category: 'Performance Issues',
     notes: 'Diagnosed latency on dashboard loading times for client workspace. Determined too many active browser extensions.',
     date: '2026-07-13',
-<<<<<<< HEAD
     managerReview: 'Perfect',
     managerComments: 'Approved request. SLA delay exclusion applied due to customer environmental hold. Outstanding documentation.',
     reviewRequestReason: 'The user took 45 minutes to install standard diagnostic utilities, which was outside our SLA control. I request SLA exclusion for this ticket.',
@@ -160,10 +155,6 @@ const RAW_INITIAL_WORK_LOGS = [
         decisionStatus: 'Approved'
       }
     ]
-=======
-    managerReview: 'Delay',
-    managerComments: 'Resolution took slightly longer than normal, but robust documentation.'
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
   },
   {
     id: 'TSK-1031',
@@ -247,7 +238,6 @@ const RAW_INITIAL_WORK_LOGS = [
   }
 ];
 
-<<<<<<< HEAD
 // Add uniqueId, strip TSK- prefix, and assign realistic times dynamically
 export const INITIAL_WORK_LOGS: WorkLog[] = RAW_INITIAL_WORK_LOGS.map((log, index) => {
   const numericId = log.id.replace(/^TSK-/, '');
@@ -263,13 +253,6 @@ export const INITIAL_WORK_LOGS: WorkLog[] = RAW_INITIAL_WORK_LOGS.map((log, inde
     uniqueId: `${numericId}-${index}-${log.date}`
   };
 }) as WorkLog[];
-=======
-// Add uniqueId dynamically to ensure all initial logs have a unique key
-export const INITIAL_WORK_LOGS: WorkLog[] = RAW_INITIAL_WORK_LOGS.map((log, index) => ({
-  ...log,
-  uniqueId: `${log.id}-${index}-${log.date}`
-})) as WorkLog[];
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
 
 // Calculate dynamic employee statistics based on work logs
 export function getEmployeePerformance(logs: WorkLog[]): EmployeePerformance[] {
@@ -311,59 +294,36 @@ export function getEmployeePerformance(logs: WorkLog[]): EmployeePerformance[] {
         callsReceived += log.callsReceived || 0;
         callsDialed += log.callsDialed || 0;
 
-<<<<<<< HEAD
         const isTask = !log.id.startsWith('CALL-') && !log.id.startsWith('ACT-');
 
         // Legacy hybrid stats or auto-calculation from Section 2 task entries
         if (log.tasksCreatedToday !== undefined) {
           tasksCreated += log.tasksCreatedToday;
         } else if (isTask) {
-=======
-        // Legacy hybrid stats or auto-calculation from Section 2 task entries
-        if (log.tasksCreatedToday !== undefined) {
-          tasksCreated += log.tasksCreatedToday;
-        } else if (log.id.startsWith('TSK-')) {
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           tasksCreated += 1;
         }
 
         if (log.tasksSolvedToday !== undefined) {
           solved += log.tasksSolvedToday;
-<<<<<<< HEAD
         } else if (isTask && log.status === 'Solved') {
-=======
-        } else if (log.id.startsWith('TSK-') && log.status === 'Solved') {
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           solved += 1;
         }
 
         if (log.tasksForwardedToday !== undefined) {
           forwarded += log.tasksForwardedToday;
-<<<<<<< HEAD
         } else if (isTask && log.status === 'Forwarded') {
-=======
-        } else if (log.id.startsWith('TSK-') && log.status === 'Forwarded') {
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           forwarded += 1;
         }
 
         if (log.pendingTasks !== undefined) {
           pending += log.pendingTasks;
-<<<<<<< HEAD
         } else if (isTask && log.status === 'Pending') {
-=======
-        } else if (log.id.startsWith('TSK-') && log.status === 'Pending') {
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           pending += 1;
         }
 
         if (log.oldQueriesSolved !== undefined) {
           oldQueriesSolved += log.oldQueriesSolved;
-<<<<<<< HEAD
         } else if (isTask && log.status === 'Solved' && log.isOldQuerySolved) {
-=======
-        } else if (log.id.startsWith('TSK-') && log.status === 'Solved' && log.isOldQuerySolved) {
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
           oldQueriesSolved += 1;
         }
       });

@@ -11,7 +11,6 @@ export type ReviewStatus =
   | 'Other'
   | 'Pending Review';
 
-<<<<<<< HEAD
 export interface Shift {
   id: string;
   name: string;
@@ -33,10 +32,6 @@ export interface ReevaluationHistoryItem {
 
 export interface WorkLog {
   id: string; // Task ID like "3012" (numeric only now!)
-=======
-export interface WorkLog {
-  id: string; // Task ID like "TSK-3012"
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
   uniqueId: string; // Truly unique database record ID
   employeeName: string;
   minutes: number;
@@ -45,7 +40,6 @@ export interface WorkLog {
   category: string;
   notes?: string;
   date: string; // "YYYY-MM-DD"
-<<<<<<< HEAD
   time?: string; // "HH:MM" (exact time of creation/update)
   managerReview: ReviewStatus;
   managerComments?: string;
@@ -58,11 +52,6 @@ export interface WorkLog {
   originalManagerComments?: string;
   reevaluationHistory?: ReevaluationHistoryItem[];
   
-=======
-  managerReview: ReviewStatus;
-  managerComments?: string;
-  
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
   // Manual Excel-like report fields entered by the agent
   callsReceived?: number;
   callsDialed?: number;
@@ -98,17 +87,8 @@ export type ViewType =
   | 'worklogs-pending'
   | 'worklogs-history'
   | 'manager-review'
-<<<<<<< HEAD
   | 'manager-reevaluation'
   | 'manager-performance'
   | 'reports'
-=======
-  | 'manager-performance'
-  | 'reports-daily'
-  | 'reports-weekly'
-  | 'reports-monthly'
-  | 'reports-quarterly'
-  | 'reports-custom'
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
   | 'employees'
   | 'settings';

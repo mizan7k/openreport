@@ -1,5 +1,4 @@
 @import "tailwindcss";
-<<<<<<< HEAD
 
 @variant dark (&:where(.dark, .dark *));
 
@@ -231,5 +230,3 @@
     background-color: var(--color-slate-900) !important;
   }
 }
-=======
->>>>>>> 9091aac7c701d4ed13844b1baa8bd2202094bbeb
