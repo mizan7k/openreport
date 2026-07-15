@@ -80,6 +80,18 @@ export interface EmployeePerformance {
   resolutionRate: number; // percentage
 }
 
+export interface Employee {
+  uid: string;
+  name: string;
+  department: string;
+  designation: string;
+  shift: string;
+  email: string;
+  phone: string;
+  status: 'Active' | 'Inactive';
+  joiningDate: string;
+}
+
 export type ViewType =
   | 'dashboard'
   | 'worklogs-add'

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { WorkLog, EmployeePerformance } from '../types';
+import { WorkLog, EmployeePerformance, Employee } from '../types';
 import { ExcelTable } from './ExcelTable';
 import { ColumnDef } from '@tanstack/react-table';
 import { PhoneCall, CheckSquare, PlusSquare, AlertOctagon, HelpCircle, FileCheck, ArrowRightLeft, TrendingUp, Clock } from 'lucide-react';
@@ -7,11 +7,12 @@ import { getEmployeePerformance, INITIAL_WORK_LOGS } from '../data';
 
 interface DashboardViewProps {
   logs: WorkLog[];
+  employees: Employee[];
   onNavigate: (view: any) => void;
   onUpdateLog: (id: string, update: Partial<WorkLog>) => void;
 }
 
-export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewProps) {
+export function DashboardView({ logs, employees, onNavigate, onUpdateLog }: DashboardViewProps) {
   // Live Clock Ticker
   const [time, setTime] = useState(new Date());
 
@@ -142,7 +143,7 @@ export function DashboardView({ logs, onNavigate, onUpdateLog }: DashboardViewPr
 
   // 4. Team Performance top 5 list
   const topPerformers = useMemo(() => {
-    const performances = getEmployeePerformance(logs);
+    const performances = getEmployeePerformance(logs, employees);
     return performances.sort((a, b) => b.resolutionRate - a.resolutionRate).slice(0, 4);
   }, [logs]);
 

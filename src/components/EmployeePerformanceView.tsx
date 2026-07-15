@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { WorkLog, EmployeePerformance } from '../types';
+import { WorkLog, EmployeePerformance, Employee } from '../types';
 import { ExcelTable } from './ExcelTable';
 import { ColumnDef } from '@tanstack/react-table';
 import { getEmployeePerformance } from '../data';
@@ -7,13 +7,14 @@ import { TrendingUp, Award, AlertTriangle, ShieldCheck } from 'lucide-react';
 
 interface EmployeePerformanceViewProps {
   logs: WorkLog[];
+  employees: Employee[];
 }
 
-export function EmployeePerformanceView({ logs }: EmployeePerformanceViewProps) {
+export function EmployeePerformanceView({ logs, employees }: EmployeePerformanceViewProps) {
   // Generate dynamically updated performance sheets
   const performances = useMemo(() => {
-    return getEmployeePerformance(logs);
-  }, [logs]);
+    return getEmployeePerformance(logs, employees);
+  }, [logs, employees]);
 
   // Overall support center metrics
   const supportCenterStats = useMemo(() => {

@@ -1,14 +1,17 @@
-import { WorkLog, EmployeePerformance } from './types';
+import { WorkLog, EmployeePerformance, Employee } from './types';
 
-export const SUPPORT_EMPLOYEES = [
-  'Sarah Connor',
-  'David Chen',
-  'Marcus Aurelius',
-  'Elena Rostova',
-  'James Sutherland',
-  'Amina Diop',
-  'Siddharth Patel',
-  'Chloe Fraser'
+let _uidCounter = 1;
+function makeUid(): string { return `e${_uidCounter++}_${Date.now()}`; }
+
+export const INITIAL_EMPLOYEES: Employee[] = [
+  { uid: makeUid(), name: 'Sarah Connor', department: 'Technical Support', designation: 'Support Specialist', shift: 'Shift 1 (11:00 AM - 07:00 PM)', email: 'sarah.c@srs.office', phone: '+1-555-0101', status: 'Active', joiningDate: '2024-03-12' },
+  { uid: makeUid(), name: 'David Chen', department: 'Customer Success', designation: 'Customer Success Rep', shift: 'Shift 1 (11:00 AM - 07:00 PM)', email: 'david.c@srs.office', phone: '+1-555-0102', status: 'Active', joiningDate: '2025-01-05' },
+  { uid: makeUid(), name: 'Marcus Aurelius', department: 'Technical Support', designation: 'Support Lead', shift: 'Shift 2 (01:30 PM - 09:30 PM)', email: 'marcus.a@srs.office', phone: '+1-555-0103', status: 'Active', joiningDate: '2023-11-15' },
+  { uid: makeUid(), name: 'Elena Rostova', department: 'Engineering', designation: 'Integration Engineer', shift: 'Shift 2 (01:30 PM - 09:30 PM)', email: 'elena.r@srs.office', phone: '+1-555-0104', status: 'Active', joiningDate: '2024-07-22' },
+  { uid: makeUid(), name: 'James Sutherland', department: 'Technical Support', designation: 'Support Specialist', shift: 'Shift 2 (01:30 PM - 09:30 PM)', email: 'james.s@srs.office', phone: '+1-555-0105', status: 'Active', joiningDate: '2024-02-18' },
+  { uid: makeUid(), name: 'Amina Diop', department: 'Customer Success', designation: 'Senior Success Engineer', shift: 'Shift 3 (05:00 PM - 01:00 AM)', email: 'amina.d@srs.office', phone: '+1-555-0106', status: 'Active', joiningDate: '2023-05-10' },
+  { uid: makeUid(), name: 'Siddharth Patel', department: 'Customer Success', designation: 'Customer Success Rep', shift: 'Shift 3 (05:00 PM - 01:00 AM)', email: 'sid.p@srs.office', phone: '+1-555-0107', status: 'Active', joiningDate: '2025-02-01' },
+  { uid: makeUid(), name: 'Chloe Fraser', department: 'Technical Support', designation: 'Support Specialist', shift: 'Shift 1 (11:00 AM - 07:00 PM)', email: 'chloe.f@srs.office', phone: '+1-555-0108', status: 'Active', joiningDate: '2024-09-09' },
 ];
 
 export const TASK_CATEGORIES = [
@@ -255,7 +258,7 @@ export const INITIAL_WORK_LOGS: WorkLog[] = RAW_INITIAL_WORK_LOGS.map((log, inde
 }) as WorkLog[];
 
 // Calculate dynamic employee statistics based on work logs
-export function getEmployeePerformance(logs: WorkLog[]): EmployeePerformance[] {
+export function getEmployeePerformance(logs: WorkLog[], employees: Employee[]): EmployeePerformance[] {
   // Base targets/constants to generate consistent data for each support representative
   const BASE_METRICS: Record<string, { callsReceived: number; callsDialed: number; queriesSolved: number }> = {
     'Sarah Connor': { callsReceived: 142, callsDialed: 110, queriesSolved: 14 },
@@ -268,7 +271,8 @@ export function getEmployeePerformance(logs: WorkLog[]): EmployeePerformance[] {
     'Chloe Fraser': { callsReceived: 105, callsDialed: 101, queriesSolved: 13 }
   };
 
-  return SUPPORT_EMPLOYEES.map(name => {
+  return employees.filter(e => e.status === 'Active').map(emp => {
+    const name = emp.name;
     const employeeLogs = logs.filter(log => log.employeeName === name);
     const base = BASE_METRICS[name] || { callsReceived: 100, callsDialed: 90, queriesSolved: 10 };
 

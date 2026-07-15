@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
-import { ViewType, WorkLog, Shift } from './types';
-import { INITIAL_WORK_LOGS } from './data';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import { ViewType, WorkLog, Shift, Employee } from './types';
+import { INITIAL_WORK_LOGS, INITIAL_EMPLOYEES } from './data';
 import { Sidebar } from './components/Sidebar';
 import { TopNav } from './components/TopNav';
 import { DashboardView } from './components/DashboardView';
@@ -11,6 +11,7 @@ import { ManagerReevaluationView } from './components/ManagerReevaluationView';
 import { ReportsView } from './components/ReportsView';
 import { EmployeesSheetView } from './components/EmployeesSheetView';
 import { SettingsView } from './components/SettingsView';
+import { ShieldAlert, Lock, X } from 'lucide-react';
 
 export default function App() {
   // Navigation View
@@ -44,6 +45,68 @@ export default function App() {
 
   // Active shift configuration (Set initial default active shift to Shift 1)
   const [activeShift, setActiveShift] = useState('Shift 1 (11:00 AM - 07:00 PM)');
+
+  // Centralized Employee Registry with localStorage persistence
+  const [employees, setEmployees] = useState<Employee[]>(() => {
+    try {
+      const stored = localStorage.getItem('employees');
+      if (stored) return JSON.parse(stored);
+    } catch {}
+    return INITIAL_EMPLOYEES;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('employees', JSON.stringify(employees));
+  }, [employees]);
+
+  // Manager PIN protection
+  const [managerPin, setManagerPin] = useState<string>(() => {
+    return localStorage.getItem('managerPin') || '1234';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('managerPin', managerPin);
+  }, [managerPin]);
+
+  const [isManagerUnlocked, setIsManagerUnlocked] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
+  const [pendingPinView, setPendingPinView] = useState<ViewType | null>(null);
+  const [pinInput, setPinInput] = useState('');
+  const [pinError, setPinError] = useState('');
+
+  const protectedViews: ViewType[] = ['manager-review', 'manager-reevaluation', 'manager-performance'];
+
+  const handleProtectedNav = useCallback((view: ViewType) => {
+    if (isManagerUnlocked) {
+      setView(view);
+    } else {
+      setPendingPinView(view);
+      setPinInput('');
+      setPinError('');
+      setShowPinModal(true);
+    }
+  }, [isManagerUnlocked]);
+
+  const verifyPin = useCallback(() => {
+    if (pinInput === managerPin) {
+      setIsManagerUnlocked(true);
+      setShowPinModal(false);
+      if (pendingPinView) {
+        setView(pendingPinView);
+        setPendingPinView(null);
+      }
+      setPinInput('');
+      setPinError('');
+    } else {
+      setPinError('Incorrect PIN');
+      setPinInput('');
+    }
+  }, [pinInput, managerPin, pendingPinView]);
+
+  const lockManager = useCallback(() => {
+    setIsManagerUnlocked(false);
+    setView('dashboard');
+  }, []);
 
   // Global search input state (prop-drilled or filtered at layout level)
   const [globalSearchTerm, setGlobalSearchTerm] = useState('');
@@ -79,6 +142,7 @@ export default function App() {
         return (
           <DashboardView
             logs={logs}
+            employees={employees}
             onNavigate={(view) => setView(view)}
             onUpdateLog={handleUpdateLog}
           />
@@ -88,6 +152,7 @@ export default function App() {
         return (
           <WorkLogsView
             logs={logs}
+            employees={employees}
             onAddLog={handleAddLog}
             onDeleteLog={handleDeleteLog}
             onUpdateLog={handleUpdateLog}
@@ -101,6 +166,7 @@ export default function App() {
         return (
           <WorkLogsView
             logs={logs}
+            employees={employees}
             onAddLog={handleAddLog}
             onDeleteLog={handleDeleteLog}
             onUpdateLog={handleUpdateLog}
@@ -114,6 +180,7 @@ export default function App() {
         return (
           <WorkLogsView
             logs={logs}
+            employees={employees}
             onAddLog={handleAddLog}
             onDeleteLog={handleDeleteLog}
             onUpdateLog={handleUpdateLog}
@@ -127,6 +194,7 @@ export default function App() {
         return (
           <WorkLogsView
             logs={logs}
+            employees={employees}
             onAddLog={handleAddLog}
             onDeleteLog={handleDeleteLog}
             onUpdateLog={handleUpdateLog}
@@ -153,14 +221,19 @@ export default function App() {
         );
 
       case 'manager-performance':
-        return <EmployeePerformanceView logs={logs} />;
+        return <EmployeePerformanceView logs={logs} employees={employees} />;
 
       case 'reports':
-
         return <ReportsView logs={logs} />;
 
       case 'employees':
-        return <EmployeesSheetView />;
+        return (
+          <EmployeesSheetView
+            employees={employees}
+            onEmployeesChange={setEmployees}
+            shifts={shifts}
+          />
+        );
 
       case 'settings':
         return (
@@ -169,6 +242,8 @@ export default function App() {
             onShiftsChange={setShifts}
             isDarkMode={isDarkMode}
             onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+            managerPin={managerPin}
+            onChangePin={setManagerPin}
           />
         );
 
@@ -176,6 +251,7 @@ export default function App() {
         return (
           <DashboardView
             logs={logs}
+            employees={employees}
             onNavigate={(view) => setView(view)}
             onUpdateLog={handleUpdateLog}
           />
@@ -191,6 +267,9 @@ export default function App() {
         setView={setView}
         pendingCount={pendingCount}
         logs={logs}
+        isManagerUnlocked={isManagerUnlocked}
+        onLockManager={lockManager}
+        onNavigateProtected={handleProtectedNav}
       />
 
       {/* Main Workspace Frame */}
@@ -209,6 +288,55 @@ export default function App() {
           {renderActiveView()}
         </main>
       </div>
+
+      {/* Manager PIN Verification Modal */}
+      {showPinModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white dark:bg-slate-900 rounded-sm shadow-xl border border-gray-200 dark:border-slate-700 w-full max-w-sm mx-4">
+            <div className="px-4 py-3 border-b border-gray-200 dark:border-slate-700 flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-gray-800 dark:text-slate-100 flex items-center gap-2">
+                <ShieldAlert className="w-4 h-4 text-amber-500" />
+                <span>Manager PIN Required</span>
+              </h3>
+              <button onClick={() => { setShowPinModal(false); setPendingPinView(null); setPinError(''); }} className="text-gray-400 hover:text-gray-600 dark:hover:text-slate-300 cursor-pointer">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <div className="p-4 space-y-3">
+              <p className="text-xs font-mono text-gray-600 dark:text-slate-400">
+                Enter your 4–6 digit Manager PIN to access the Manager Hub.
+              </p>
+              <input
+                type="password"
+                inputMode="numeric"
+                maxLength={6}
+                value={pinInput}
+                onChange={e => { const v = e.target.value.replace(/\D/g, '').slice(0, 6); setPinInput(v); setPinError(''); }}
+                onKeyDown={e => { if (e.key === 'Enter' && pinInput.length >= 4) verifyPin(); }}
+                className="w-full border border-gray-300 dark:border-slate-600 rounded px-3 py-2 text-lg font-mono text-center tracking-[0.5em] bg-white dark:bg-slate-800 text-gray-800 dark:text-slate-100 focus:outline-none focus:border-blue-500"
+                placeholder="******"
+                autoFocus
+              />
+              {pinError && (
+                <p className="text-xs font-mono text-red-500 dark:text-red-400 text-center">{pinError}</p>
+              )}
+            </div>
+            <div className="px-4 py-3 border-t border-gray-200 dark:border-slate-700 flex justify-end gap-2">
+              <button onClick={() => { setShowPinModal(false); setPendingPinView(null); setPinError(''); }} className="px-3 py-1.5 text-xs font-mono font-semibold text-gray-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer">
+                Cancel
+              </button>
+              <button
+                onClick={verifyPin}
+                disabled={pinInput.length < 4}
+                className="px-4 py-1.5 text-xs font-mono font-semibold text-white bg-blue-600 rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer flex items-center gap-1.5"
+              >
+                <Lock className="w-3.5 h-3.5" />
+                <span>Unlock</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

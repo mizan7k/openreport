@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { WorkLog, TaskType, TaskStatus } from '../types';
+import { WorkLog, TaskType, TaskStatus, Employee } from '../types';
 import { ExcelTable } from './ExcelTable';
 import { ColumnDef } from '@tanstack/react-table';
 import { 
@@ -18,10 +18,11 @@ import {
   Minus,
   Clock
 } from 'lucide-react';
-import { TASK_CATEGORIES, SUPPORT_EMPLOYEES } from '../data';
+import { TASK_CATEGORIES } from '../data';
 
 interface WorkLogsViewProps {
   logs: WorkLog[];
+  employees: Employee[];
   onAddLog: (newLog: WorkLog) => void;
   onDeleteLog: (id: string) => void;
   onUpdateLog?: (id: string, update: Partial<WorkLog>) => void;
@@ -30,7 +31,7 @@ interface WorkLogsViewProps {
   activeShift?: string;
 }
 
-export function WorkLogsView({ logs, onAddLog, onDeleteLog, onUpdateLog, activeSubView }: WorkLogsViewProps) {
+export function WorkLogsView({ logs, employees, onAddLog, onDeleteLog, onUpdateLog, activeSubView }: WorkLogsViewProps) {
   // Today is hardcoded to '2026-07-14' in this app environment
   const todayStr = '2026-07-14';
 
@@ -50,7 +51,7 @@ export function WorkLogsView({ logs, onAddLog, onDeleteLog, onUpdateLog, activeS
   const [status, setStatus] = useState<TaskStatus>('Solved');
   const [category, setCategory] = useState(TASK_CATEGORIES[0]);
   const [notes, setNotes] = useState('');
-  const [selectedEmployee, setSelectedEmployee] = useState(SUPPORT_EMPLOYEES[0]);
+  const [selectedEmployee, setSelectedEmployee] = useState(employees.length > 0 ? employees[0].name : '');
   const [isOldQuerySolved, setIsOldQuerySolved] = useState(false);
   const [validationError, setValidationError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -521,8 +522,8 @@ export function WorkLogsView({ logs, onAddLog, onDeleteLog, onUpdateLog, activeS
                 }}
                 className="w-full bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-sm px-3 py-2 text-xs focus:outline-none focus:border-blue-500 font-semibold cursor-pointer dark:text-slate-100"
               >
-                {SUPPORT_EMPLOYEES.map(emp => (
-                  <option key={emp} value={emp}>{emp}</option>
+                {employees.filter(e => e.status === 'Active').map(emp => (
+                  <option key={emp.uid} value={emp.name}>{emp.name}</option>
                 ))}
               </select>
             </div>

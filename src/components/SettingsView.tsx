@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Sliders, CheckSquare, RefreshCw, HardDrive, Database, FileSpreadsheet, Clock, Trash2, Plus, Sun, Moon } from 'lucide-react';
+import { Settings, Sliders, CheckSquare, RefreshCw, HardDrive, Database, FileSpreadsheet, Clock, Trash2, Plus, Sun, Moon, Lock, ShieldAlert, KeyRound } from 'lucide-react';
 import { Shift } from '../types';
 
 interface SettingsViewProps {
@@ -7,6 +7,8 @@ interface SettingsViewProps {
   onShiftsChange: React.Dispatch<React.SetStateAction<Shift[]>>;
   isDarkMode?: boolean;
   onToggleDarkMode?: () => void;
+  managerPin?: string;
+  onChangePin?: (pin: string) => void;
 }
 
 function calculateShiftHours(startTime: string, endTime: string): string {
@@ -45,7 +47,7 @@ function calculateShiftHours(startTime: string, endTime: string): string {
   }
 }
 
-export function SettingsView({ shifts, onShiftsChange, isDarkMode = false, onToggleDarkMode }: SettingsViewProps) {
+export function SettingsView({ shifts, onShiftsChange, isDarkMode = false, onToggleDarkMode, managerPin = '1234', onChangePin }: SettingsViewProps) {
   const [slaTarget, setSlaTarget] = useState(85);
   const [categories, setCategories] = useState([
     'Billing & Invoices',
@@ -77,6 +79,33 @@ export function SettingsView({ shifts, onShiftsChange, isDarkMode = false, onTog
     setNewCat('');
     setFeedback('Category appended successfully.');
     setTimeout(() => setFeedback(''), 3000);
+  };
+
+  // Manager PIN state
+  const [currentPinInput, setCurrentPinInput] = useState('');
+  const [newPin, setNewPin] = useState('');
+  const [confirmPin, setConfirmPin] = useState('');
+  const [pinFeedback, setPinFeedback] = useState('');
+
+  const handleChangePin = () => {
+    if (currentPinInput !== managerPin) {
+      setPinFeedback('Current PIN is incorrect.');
+      return;
+    }
+    if (newPin.length < 4 || newPin.length > 6) {
+      setPinFeedback('New PIN must be 4–6 digits.');
+      return;
+    }
+    if (newPin !== confirmPin) {
+      setPinFeedback('New PIN and confirmation do not match.');
+      return;
+    }
+    if (onChangePin) onChangePin(newPin);
+    setPinFeedback('Manager PIN updated successfully.');
+    setCurrentPinInput('');
+    setNewPin('');
+    setConfirmPin('');
+    setTimeout(() => setPinFeedback(''), 3000);
   };
 
   const handleAddShift = (e: React.FormEvent) => {
@@ -340,31 +369,70 @@ export function SettingsView({ shifts, onShiftsChange, isDarkMode = false, onTog
         </div>
       </div>
 
-      {/* Database & Specs */}
+      {/* Manager Security */}
       <div className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-sm p-4 space-y-3">
         <div className="flex items-center gap-1.5 pb-2 border-b border-gray-100 dark:border-slate-800 font-semibold text-gray-700 dark:text-slate-200">
-          <Database className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-          <span>System Specifications & Audit Trails</span>
+          <ShieldAlert className="w-4 h-4 text-amber-500 dark:text-amber-400" />
+          <span>Manager Security</span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-gray-600 dark:text-slate-300 font-mono text-[10px]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
           <div>
-            <span className="block text-gray-400 dark:text-slate-500 font-bold">DATABASE DRIVER</span>
-            <span>LocalMemoryJS v1.0</span>
+            <label className="block text-gray-500 dark:text-slate-400 font-mono text-[9px] uppercase font-bold mb-1">Current PIN</label>
+            <input
+              type="password"
+              inputMode="numeric"
+              maxLength={6}
+              value={currentPinInput}
+              onChange={e => { setCurrentPinInput(e.target.value.replace(/\D/g, '').slice(0, 6)); setPinFeedback(''); }}
+              className="w-full bg-slate-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-sm px-2.5 py-1 text-xs font-mono focus:outline-none focus:bg-white dark:focus:bg-slate-900 text-gray-800 dark:text-slate-100"
+              placeholder="Enter current PIN"
+            />
           </div>
           <div>
-            <span className="block text-gray-400 dark:text-slate-500 font-bold">HOST NODE ID</span>
-            <span>CLOUD_RUN_REPLICA</span>
+            <label className="block text-gray-500 dark:text-slate-400 font-mono text-[9px] uppercase font-bold mb-1">New PIN (4–6 digits)</label>
+            <input
+              type="password"
+              inputMode="numeric"
+              maxLength={6}
+              value={newPin}
+              onChange={e => { setNewPin(e.target.value.replace(/\D/g, '').slice(0, 6)); setPinFeedback(''); }}
+              className="w-full bg-slate-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-sm px-2.5 py-1 text-xs font-mono focus:outline-none focus:bg-white dark:focus:bg-slate-900 text-gray-800 dark:text-slate-100"
+              placeholder="Enter new PIN"
+            />
           </div>
-          <div>
-            <span className="block text-gray-400 dark:text-slate-500 font-bold">ENCRYPTION PROTOCOL</span>
-            <span>TLS_1.3_AEAD</span>
-          </div>
-          <div>
-            <span className="block text-gray-400 dark:text-slate-500 font-bold">CURRENT ENVIRONMENT</span>
-            <span>Vite Sandbox</span>
+          <div className="flex items-end gap-2">
+            <div className="flex-1">
+              <label className="block text-gray-500 dark:text-slate-400 font-mono text-[9px] uppercase font-bold mb-1">Confirm PIN</label>
+              <input
+                type="password"
+                inputMode="numeric"
+                maxLength={6}
+                value={confirmPin}
+                onChange={e => { setConfirmPin(e.target.value.replace(/\D/g, '').slice(0, 6)); setPinFeedback(''); }}
+                className="w-full bg-slate-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-sm px-2.5 py-1 text-xs font-mono focus:outline-none focus:bg-white dark:focus:bg-slate-900 text-gray-800 dark:text-slate-100"
+                placeholder="Confirm new PIN"
+              />
+            </div>
+            <button
+              onClick={handleChangePin}
+              className="bg-amber-600 hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600 text-white text-[11px] font-semibold py-1.5 px-3 rounded-sm border border-amber-700 dark:border-amber-600 flex items-center gap-1 cursor-pointer transition-colors shrink-0"
+            >
+              <KeyRound className="w-3.5 h-3.5" />
+              <span>Update PIN</span>
+            </button>
           </div>
         </div>
+
+        {pinFeedback && (
+          <div className={`font-mono text-[10px] px-2.5 py-1.5 rounded-sm border ${
+            pinFeedback.includes('successfully')
+              ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
+              : 'bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800'
+          }`}>
+            {pinFeedback}
+          </div>
+        )}
       </div>
 
       {/* Brand & Slogan Credits Card */}

@@ -14,7 +14,8 @@ import {
   Calendar,
   Layers,
   Menu,
-  ShieldAlert
+  ShieldAlert,
+  Lock
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -22,9 +23,12 @@ interface SidebarProps {
   setView: (view: ViewType) => void;
   pendingCount: number;
   logs: WorkLog[];
+  isManagerUnlocked: boolean;
+  onLockManager: () => void;
+  onNavigateProtected: (view: ViewType) => void;
 }
 
-export function Sidebar({ currentView, setView, pendingCount, logs }: SidebarProps) {
+export function Sidebar({ currentView, setView, pendingCount, logs, isManagerUnlocked, onLockManager, onNavigateProtected }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   // Helper to check active button
@@ -216,7 +220,7 @@ export function Sidebar({ currentView, setView, pendingCount, logs }: SidebarPro
           <div className={`space-y-0.5 ${!isCollapsed ? 'mt-1 pl-1' : ''}`}>
             {/* Review Reports */}
             <button
-              onClick={() => setView('manager-review')}
+              onClick={() => onNavigateProtected('manager-review')}
               className={getButtonClass('manager-review')}
             >
               <div className="flex items-center gap-2">
@@ -232,7 +236,7 @@ export function Sidebar({ currentView, setView, pendingCount, logs }: SidebarPro
 
             {/* Team Performance */}
             <button
-              onClick={() => setView('manager-performance')}
+              onClick={() => onNavigateProtected('manager-performance')}
               className={getButtonClass('manager-performance')}
             >
               <div className="flex items-center gap-2">
@@ -248,7 +252,7 @@ export function Sidebar({ currentView, setView, pendingCount, logs }: SidebarPro
 
             {/* Re-evaluation Disputes */}
             <button
-              onClick={() => setView('manager-reevaluation')}
+              onClick={() => onNavigateProtected('manager-reevaluation')}
               className={getButtonClass('manager-reevaluation', true)}
             >
               <div className="flex items-center gap-2">
@@ -266,6 +270,28 @@ export function Sidebar({ currentView, setView, pendingCount, logs }: SidebarPro
                 </div>
               )}
             </button>
+
+            {/* Lock Manager Hub */}
+            {isManagerUnlocked && !isCollapsed && (
+              <button
+                onClick={onLockManager}
+                className="w-full flex items-center justify-between rounded transition-all cursor-pointer px-3 py-1.5 text-gray-500 dark:text-slate-400 hover:bg-amber-50 dark:hover:bg-amber-950/20 hover:text-amber-700 dark:hover:text-amber-400 font-semibold"
+              >
+                <div className="flex items-center gap-2">
+                  <Lock className="w-3.5 h-3.5 shrink-0" />
+                  <span>Lock Manager Hub</span>
+                </div>
+              </button>
+            )}
+            {isManagerUnlocked && isCollapsed && (
+              <button
+                onClick={onLockManager}
+                className="w-full flex items-center justify-center py-2 rounded transition-all cursor-pointer text-gray-500 dark:text-slate-400 hover:bg-amber-50 dark:hover:bg-amber-950/20 hover:text-amber-700 dark:hover:text-amber-400"
+                title="Lock Manager Hub"
+              >
+                <Lock className="w-3.5 h-3.5 shrink-0" />
+              </button>
+            )}
           </div>
         </div>
 
